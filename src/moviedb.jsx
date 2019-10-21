@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-key */
 import React from 'react';
 import axios from 'axios';
+import SearchButton from './searchButton';
 
 class Moviedb extends React.Component {
   constructor(props) {
@@ -11,6 +12,7 @@ class Moviedb extends React.Component {
       error: false,
     };
     this.getData = this.getData.bind(this);
+    this.handleSearchButton = this.handleSearchButton.bind(this);
   }
 
   getData() {
@@ -78,9 +80,16 @@ class Moviedb extends React.Component {
     this.getData();
   }
 
+  handleSearchButton() {
+    this.getData();
+  }
+
   render() {
     return (
       <div>
+        <SearchButton
+          onClick={this.handleSearchButton}
+        />
         <img src={this.state.image} />
         <div>
           {this.state.movies}
