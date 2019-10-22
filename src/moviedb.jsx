@@ -2,6 +2,7 @@
 import React from 'react';
 import axios from 'axios';
 import SearchButton from './searchButton';
+import SaveButton from './saveButton';
 
 class Moviedb extends React.Component {
   constructor(props) {
@@ -15,7 +16,9 @@ class Moviedb extends React.Component {
     };
     this.getData = this.getData.bind(this);
     this.handleSearchButton = this.handleSearchButton.bind(this);
+    this.handleSaveButton = this.handleSaveButton.bind(this);
     this.pickMovie = this.pickMovie.bind(this);
+    this.saveMovie = this.saveMovie.bind(this);
   }
 
   getData() {
@@ -77,18 +80,18 @@ class Moviedb extends React.Component {
   }
 
   pickMovie() {
-    if (this.state.currentMovie) {
-      this.setState({ pastMovies: this.state.currentMovie });
-      let randNumber = [Math.round(Math.random() * 700)];
-      const randomMovie = this.state.movieList[randNumber];
-      this.setState({ currentMovie: randomMovie.title });
-      this.setState({ image: randomMovie.image });
-    } else {
-      let randNumber = [Math.round(Math.random() * 700)];
-      const randomMovie = this.state.movieList[randNumber];
-      this.setState({ currentMovie: randomMovie.title });
-      this.setState({ image: randomMovie.image });
-    }
+    const randomNumber = [Math.round(Math.random() * (this.state.movieList.length))];
+    const randomMovie = this.state.movieList[randomNumber];
+    this.setState({ currentMovie: randomMovie.title });
+    this.setState({ image: randomMovie.image });
+  }
+
+  saveMovie() {
+    const index = this.state.movieList.findIndex(x => x === (this.state.currentMovie));
+    this.state.pastMovies.push(this.state.currentMovie);
+    this.state.movieList.splice(index, 1);
+    console.log(this.state.movieList);
+    console.log(this.state.pastMovies);
   }
 
   componentDidMount() {
@@ -99,11 +102,18 @@ class Moviedb extends React.Component {
     this.pickMovie();
   }
 
+  handleSaveButton() {
+    this.saveMovie();
+  }
+
   render() {
     return (
       <div>
         <SearchButton
           onClick={this.handleSearchButton}
+        />
+        <SaveButton
+          onClick={this.handleSaveButton}
         />
         <img src={this.state.image} />
         <div>
