@@ -81,20 +81,24 @@ class Moviedb extends React.Component {
   pickMovie() {
     const randomNumber = [Math.round(Math.random() * (this.state.movieList.length))];
     const randomMovie = this.state.movieList[randomNumber];
-    this.setState({ currentMovie: randomMovie.title });
-    this.setState({ image: randomMovie.image });
+    const check = this.state.pastMovies.includes(randomMovie.title);
+    if (!check) {
+      this.setState({ currentMovie: randomMovie.title });
+      this.setState({ image: randomMovie.image });
+    } else {
+      this.pickMovie();
+    }
   }
 
   saveMovie() {
     const index = this.state.movieList.findIndex(x => x === (this.state.currentMovie));
     this.state.movieList.splice(index, 1);
-    Axios.post('http://localhost:8080/filmfinder/user/movie',{
+    Axios.post('http://localhost:8080/filmfinder/user/movie', {
       email: this.props.user.email,
       movie: this.state.currentMovie,
-    })
+    });
     console.log(this.state.movieList);
     console.log(this.state.pastMovies);
-
   }
 
   componentDidMount() {
