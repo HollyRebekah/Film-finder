@@ -2,17 +2,23 @@
 import React from 'react';
 import axios from 'axios';
 import SearchButton from './searchButton';
+import SaveButton from './saveButton';
 
 class Moviedb extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      movies: [],
+      movieList: [],
+      pastMovies: [],
+      currentMovie: null,
       image: null,
       error: false,
     };
     this.getData = this.getData.bind(this);
     this.handleSearchButton = this.handleSearchButton.bind(this);
+    this.handleSaveButton = this.handleSaveButton.bind(this);
+    this.pickMovie = this.pickMovie.bind(this);
+    this.saveMovie = this.saveMovie.bind(this);
   }
 
   getData() {
@@ -67,13 +73,25 @@ class Moviedb extends React.Component {
       const response5 = allResponses[4].data.ITEMS;
       const response6 = allResponses[5].data.ITEMS;
       const response7 = allResponses[6].data.ITEMS;
-      const movieList = response1.concat(response2, response3, response4, response5, response6, response7);
-      console.log(movieList);
-      const randomMovie = movieList[Math.round(Math.random() * 700)];
-      this.setState({ movies: randomMovie.title });
-      this.setState({ image: randomMovie.image });
-      console.log(this.state.movies);
+      const movieData = response1.concat(response2, response3, response4, response5, response6, response7);
+      this.setState({ movieList: movieData });
+      console.log(movieData);
     });
+  }
+
+  pickMovie() {
+    const randomNumber = [Math.round(Math.random() * (this.state.movieList.length))];
+    const randomMovie = this.state.movieList[randomNumber];
+    this.setState({ currentMovie: randomMovie.title });
+    this.setState({ image: randomMovie.image });
+  }
+
+  saveMovie() {
+    const index = this.state.movieList.findIndex(x => x === (this.state.currentMovie));
+    this.state.pastMovies.push(this.state.currentMovie);
+    this.state.movieList.splice(index, 1);
+    console.log(this.state.movieList);
+    console.log(this.state.pastMovies);
   }
 
   componentDidMount() {
@@ -81,7 +99,11 @@ class Moviedb extends React.Component {
   }
 
   handleSearchButton() {
-    this.getData();
+    this.pickMovie();
+  }
+
+  handleSaveButton() {
+    this.saveMovie();
   }
 
   render() {
@@ -90,9 +112,12 @@ class Moviedb extends React.Component {
         <SearchButton
           onClick={this.handleSearchButton}
         />
+        <SaveButton
+          onClick={this.handleSaveButton}
+        />
         <img src={this.state.image} />
         <div>
-          {this.state.movies}
+          {this.state.currentMovie}
         </div>
       </div>
     );
