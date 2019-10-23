@@ -1,5 +1,5 @@
 import React from 'react';
-import Moviedb from './moviedb';
+import Moviedb from './components/moviedb';
 
 function App() {
   return (

@@ -2,7 +2,7 @@
 import React from 'react';
 import axios from 'axios';
 import SearchButton from './searchButton';
-import SaveButton from './saveButton';
+import SaveButton from '../saveButton';
 
 class Moviedb extends React.Component {
   constructor(props) {
