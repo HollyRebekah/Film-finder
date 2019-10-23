@@ -2,13 +2,14 @@ import React from 'react';
 import axios from 'axios';
 import SearchButton from './searchButton';
 import SaveButton from './saveButton';
+import Axios from 'axios';
 
 class Moviedb extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       movieList: [],
-      pastMovies: [],
+      pastMovies: props.user.filmsWatched,
       currentMovie: null,
       image: null,
     };
@@ -86,10 +87,14 @@ class Moviedb extends React.Component {
 
   saveMovie() {
     const index = this.state.movieList.findIndex(x => x === (this.state.currentMovie));
-    this.state.pastMovies.push(this.state.currentMovie);
     this.state.movieList.splice(index, 1);
+    Axios.post('http://localhost:8080/filmfinder/user/movie',{
+      email: this.props.user.email,
+      movie: this.state.currentMovie,
+    })
     console.log(this.state.movieList);
     console.log(this.state.pastMovies);
+
   }
 
   componentDidMount() {
