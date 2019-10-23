@@ -1,8 +1,7 @@
-/* eslint-disable react/jsx-key */
 import React from 'react';
 import axios from 'axios';
 import SearchButton from './searchButton';
-import SaveButton from '../saveButton';
+import SaveButton from './saveButton';
 
 class Moviedb extends React.Component {
   constructor(props) {
@@ -12,7 +11,6 @@ class Moviedb extends React.Component {
       pastMovies: [],
       currentMovie: null,
       image: null,
-      error: false,
     };
     this.getData = this.getData.bind(this);
     this.handleSearchButton = this.handleSearchButton.bind(this);
@@ -115,7 +113,7 @@ class Moviedb extends React.Component {
         <SaveButton
           onClick={this.handleSaveButton}
         />
-        <img src={this.state.image} />
+        <img src={this.state.image} alt="blah" />
         <div>
           {this.state.currentMovie}
         </div>
