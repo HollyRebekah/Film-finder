@@ -42,9 +42,10 @@ class signUp extends React.Component {
   render() {
     return (
       <div>
+        <h1>Sign up</h1>
         <form>
           <div className="first-name">
-            <input
+            First Name: <input
               name="firstName"
               placeholder="First Name"
               value={this.state.fields.firstName}
@@ -52,7 +53,7 @@ class signUp extends React.Component {
             />
           </div>
           <div className="last-name">
-            <input
+            Last Name: <input
               name="lastName"
               placeholder="Last Name"
               value={this.state.fields.lastName}
@@ -60,7 +61,7 @@ class signUp extends React.Component {
             />
           </div>
           <div className="email">
-            <input
+            Email: <input
               name="email"
               placeholder="Email"
               value={this.state.fields.email}
@@ -68,7 +69,7 @@ class signUp extends React.Component {
             />
           </div>
           <div className="password">
-            <input
+            Password: <input
               name="password"
               placeholder="Password"
               value={this.state.fields.password}

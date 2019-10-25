@@ -122,7 +122,9 @@ class Moviedb extends React.Component {
         <SaveButton
           onClick={this.handleSaveButton}
         />
-        <img src={this.state.image} alt="blah" />
+        <div className="image">
+          <img src={this.state.image} alt="blah" />
+        </div>
         <div>
           {this.state.currentMovie}
         </div>

@@ -1,0 +1,14 @@
+.nav-bar{
+    border-bottom: 1px solid black;
+}
+
+.title{
+    display: flex;
+    flex-direction: row;
+}
+
+#nav-bar-links{
+    margin: 0;
+    display:flex;
+    flex-direction: row-reverse;
+}
