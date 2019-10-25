@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import '../styles/nav-bar.css';
 
 const NavBar = () => {
@@ -8,7 +9,7 @@ const NavBar = () => {
         App name goes here
       </div>
       <ul id="nav-bar-links">
-            User Info
+        <Link to="/user-account">User Info</Link>
       </ul>
     </div>
   );

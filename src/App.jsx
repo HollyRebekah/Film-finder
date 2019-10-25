@@ -4,19 +4,25 @@ import Moviedb from './components/moviedb';
 import Login from './components/login';
 import SignUp from './components/signup';
 import NavBar from './components/navbar';
+import TokenManager from './utils/token-manager';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: null,
+      user: TokenManager.isTokenValid() ? TokenManager.getTokenPayload() : null,
     };
 
     this.handleLogin = this.handleLogin.bind(this);
+    this.isLoggedIn = this.isLoggedIn.bind(this);
   }
 
-  handleLogin(user) {
-    this.setState({ user });
+  handleLogin() {
+    this.setState({ user: TokenManager.getTokenPayload() });
+  }
+
+  isLoggedIn() {
+    return Boolean(this.state.user) && TokenManager.isTokenValid();
   }
 
   render() {
