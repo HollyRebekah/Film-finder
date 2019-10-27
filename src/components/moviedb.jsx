@@ -95,6 +95,7 @@ class Moviedb extends React.Component {
     Axios.post('http://localhost:8080/filmfinder/users/movie', {
       email: this.props.user.email,
       movie: this.state.currentMovie,
+      movieImage: this.state.image,
     });
     console.log(this.state.movieList);
     console.log(this.props.user.filmsWatched);
