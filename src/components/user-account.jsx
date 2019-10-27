@@ -7,7 +7,7 @@ const UserAccount = (props) => {
       <div>Name: {props.user.firstName} {props.user.lastName}</div>
       <div>Movies I've Watached:{props.user.filmsWatched.map((movie) => {
         return (
-          <li key={props.user.filmsWatched.indexOf(movie)}>{movie}</li>
+          <li key={props.user.filmsWatched.indexOf(movie)}>{props.user.filmsWatched}</li>
         );
       })}
       </div>
