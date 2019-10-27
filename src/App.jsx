@@ -5,6 +5,7 @@ import Login from './components/login';
 import SignUp from './components/signup';
 import NavBar from './components/navbar';
 import TokenManager from './utils/token-manager';
+import UserAccount from './components/user-account';
 
 class App extends React.Component {
   constructor(props) {
@@ -28,7 +29,9 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <NavBar />
+        <NavBar
+          user={this.state.user}
+        />
         <Switch>
           <Route
             exact
@@ -49,6 +52,12 @@ class App extends React.Component {
             exact
             path="/sign-up"
             component={SignUp}
+          />
+
+          <Route
+            exact
+            path="/user-account"
+            render={(props) => <UserAccount {...props} user={this.state.user} />}
           />
         </Switch>
       </div>
