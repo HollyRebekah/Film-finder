@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import TokenManager from '../utils/token-manager';
 
 class Login extends React.Component {
@@ -10,6 +10,7 @@ class Login extends React.Component {
     this.state = {
       email: '',
       password: '',
+      errorMessage: '',
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -18,6 +19,7 @@ class Login extends React.Component {
 
   handleInputChange(event) {
     const { name, value } = event.target;
+
     this.setState({ [name]: value });
   }
 

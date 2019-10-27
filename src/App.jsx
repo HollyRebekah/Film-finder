@@ -51,7 +51,7 @@ class App extends React.Component {
           <Route
             exact
             path="/sign-up"
-            render={(props) => <SignUp {...props} onSignup={this.handleLogin} />}
+            component={SignUp}
           />
 
           <Route
