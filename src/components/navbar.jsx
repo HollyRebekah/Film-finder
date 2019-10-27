@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaUser} from 'react-icons/fa';
+import { FaUser } from 'react-icons/fa';
 import { MdLocalMovies } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import '../styles/nav-bar.css';
