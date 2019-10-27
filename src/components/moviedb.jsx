@@ -9,6 +9,7 @@ class Moviedb extends React.Component {
     super(props);
     this.state = {
       movieList: [],
+      pastMovies: props.user.filmsWatched,
       currentMovie: null,
       image: null,
     };
@@ -80,7 +81,7 @@ class Moviedb extends React.Component {
   pickMovie() {
     const randomNumber = [Math.round(Math.random() * (this.state.movieList.length))];
     const randomMovie = this.state.movieList[randomNumber];
-    const check = this.props.user.filmsWatched.includes(randomMovie.title);
+    const check = this.state.pastMovies.includes(randomMovie.title);
     if (!check) {
       this.setState({ currentMovie: randomMovie.title });
       this.setState({ image: randomMovie.image });
@@ -92,12 +93,12 @@ class Moviedb extends React.Component {
   saveMovie() {
     const index = this.state.movieList.findIndex(x => x === (this.state.currentMovie));
     this.state.movieList.splice(index, 1);
-    Axios.post('http://localhost:8080/filmfinder/users/movie', {
+    Axios.post('http://localhost:8080/filmfinder/user/movie', {
       email: this.props.user.email,
       movie: this.state.currentMovie,
     });
     console.log(this.state.movieList);
-    console.log(this.props.user.filmsWatched);
+    console.log(this.state.pastMovies);
   }
 
   componentDidMount() {
