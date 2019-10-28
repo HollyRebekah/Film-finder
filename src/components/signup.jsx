@@ -1,10 +1,9 @@
 import React from 'react';
 import Axios from 'axios';
-import TokenManager from '../utils/token-manager';
 
 class signUp extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       fields: {
         firstName: '',
@@ -12,11 +11,12 @@ class signUp extends React.Component {
         email: '',
         password: '',
       },
-      errors: null,
+      errors: {},
     };
   }
 
   handleCreateUser = (event) => {
+    console.log('Hello');
     Axios.post('http://localhost:8080/filmfinder/users', {
       withCredentials: true,
       firstName: this.state.fields.firstName,
@@ -26,18 +26,9 @@ class signUp extends React.Component {
     })
       .then(res => {
         console.log(res);
-        return Axios.post('http://localhost:8080/filmfinder/auth', {
-          email: res.data.email,
-          password: this.state.fields.password,
-        })
-          .then((response) => {
-            TokenManager.setToken(response.data);
-            this.props.onSignup();
-            this.props.history.push('/');
-          })
-          .catch((error) => {
-            this.setState({ errors: error.response.data.message });
-          });
+      })
+      .catch(error => {
+        console.log(error);
       });
     event.preventDefault();
   };

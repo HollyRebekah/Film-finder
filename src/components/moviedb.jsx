@@ -8,6 +8,7 @@ class Moviedb extends React.Component {
     super(props);
     this.state = {
       movieList: [],
+      pastMovies: props.user.filmsWatched,
       currentMovie: null,
       image: null,
       synopsis: null,
@@ -39,7 +40,7 @@ class Moviedb extends React.Component {
   pickMovie() {
     const randomNumber = [Math.round(Math.random() * (this.state.movieList.length))];
     const randomMovie = this.state.movieList[randomNumber];
-    const check = this.props.user.filmsWatched.includes(randomMovie.title);
+    const check = this.state.pastMovies.includes(randomMovie.title);
     if (!check) {
       this.setState({ currentMovie: randomMovie.title });
       this.setState({ image: randomMovie.image });
@@ -58,7 +59,7 @@ class Moviedb extends React.Component {
       movieImage: this.state.image,
     });
     console.log(this.state.movieList);
-    console.log(this.props.user.filmsWatched);
+    console.log(this.state.pastMovies);
   }
 
   handleSearchButton() {
