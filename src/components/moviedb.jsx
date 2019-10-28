@@ -2,7 +2,6 @@ import React from 'react';
 import axios from 'axios';
 import SearchButton from './searchButton';
 import SaveButton from './saveButton';
-import Axios from 'axios';
 
 class Moviedb extends React.Component {
   constructor(props) {
@@ -12,69 +11,29 @@ class Moviedb extends React.Component {
       pastMovies: props.user.filmsWatched,
       currentMovie: null,
       image: null,
+      synopsis: null,
+      genreID: null,
     };
     this.getData = this.getData.bind(this);
     this.handleSearchButton = this.handleSearchButton.bind(this);
     this.handleSaveButton = this.handleSaveButton.bind(this);
     this.pickMovie = this.pickMovie.bind(this);
     this.saveMovie = this.saveMovie.bind(this);
+    this.setGenreID = this.setGenreID.bind(this);
   }
 
-  getData() {
-    Promise.all([
-      axios.get('https://unogs-unos-v1.p.rapidapi.com/aaapi.cgi?q=get%3Anew100-!1900%2C2018-!0%2C5-!0%2C10-!0-!Any-!Any-!Any-!gt10-!%100Bdownloadable%7D&t=ns&cl=all&st=adv&ob=Relevance&p=1&sa=and', {
-        headers: {
-          'x-rapidapi-host': 'unogs-unogs-v1.p.rapidapi.com',
-          'x-rapidapi-key': 'e53590f299mshe3f80deda898096p1fedcejsn9038057e8d3c',
-        },
-      }),
-      axios.get('https://unogs-unos-v1.p.rapidapi.com/aaapi.cgi?q=get%3Anew100-!1900%2C2018-!0%2C5-!0%2C10-!0-!Any-!Any-!Any-!gt10-!%100Bdownloadable%7D&t=ns&cl=all&st=adv&ob=Relevance&p=2&sa=and', {
-        headers: {
-          'x-rapidapi-host': 'unogs-unogs-v1.p.rapidapi.com',
-          'x-rapidapi-key': 'e53590f299mshe3f80deda898096p1fedcejsn9038057e8d3c',
-        },
-      }),
-      axios.get('https://unogs-unos-v1.p.rapidapi.com/aaapi.cgi?q=get%3Anew100-!1900%2C2018-!0%2C5-!0%2C10-!0-!Any-!Any-!Any-!gt10-!%100Bdownloadable%7D&t=ns&cl=all&st=adv&ob=Relevance&p=3&sa=and', {
-        headers: {
-          'x-rapidapi-host': 'unogs-unogs-v1.p.rapidapi.com',
-          'x-rapidapi-key': 'e53590f299mshe3f80deda898096p1fedcejsn9038057e8d3c',
-        },
-      }),
-      axios.get('https://unogs-unos-v1.p.rapidapi.com/aaapi.cgi?q=get%3Anew100-!1900%2C2018-!0%2C5-!0%2C10-!0-!Any-!Any-!Any-!gt10-!%100Bdownloadable%7D&t=ns&cl=all&st=adv&ob=Relevance&p=4&sa=and', {
-        headers: {
-          'x-rapidapi-host': 'unogs-unogs-v1.p.rapidapi.com',
-          'x-rapidapi-key': 'e53590f299mshe3f80deda898096p1fedcejsn9038057e8d3c',
-        },
-      }),
-      axios.get('https://unogs-unos-v1.p.rapidapi.com/aaapi.cgi?q=get%3Anew100-!1900%2C2018-!0%2C5-!0%2C10-!0-!Any-!Any-!Any-!gt10-!%100Bdownloadable%7D&t=ns&cl=all&st=adv&ob=Relevance&p=5&sa=and', {
-        headers: {
-          'x-rapidapi-host': 'unogs-unogs-v1.p.rapidapi.com',
-          'x-rapidapi-key': 'e53590f299mshe3f80deda898096p1fedcejsn9038057e8d3c',
-        },
-      }),
-      axios.get('https://unogs-unos-v1.p.rapidapi.com/aaapi.cgi?q=get%3Anew100-!1900%2C2018-!0%2C5-!0%2C10-!0-!Any-!Any-!Any-!gt10-!%100Bdownloadable%7D&t=ns&cl=all&st=adv&ob=Relevance&p=6&sa=and', {
-        headers: {
-          'x-rapidapi-host': 'unogs-unogs-v1.p.rapidapi.com',
-          'x-rapidapi-key': 'e53590f299mshe3f80deda898096p1fedcejsn9038057e8d3c',
-        },
-      }),
-      axios.get('https://unogs-unos-v1.p.rapidapi.com/aaapi.cgi?q=get%3Anew100-!1900%2C2018-!0%2C5-!0%2C10-!0-!Any-!Any-!Any-!gt10-!%100Bdownloadable%7D&t=ns&cl=all&st=adv&ob=Relevance&p=7&sa=and', {
-        headers: {
-          'x-rapidapi-host': 'unogs-unogs-v1.p.rapidapi.com',
-          'x-rapidapi-key': 'e53590f299mshe3f80deda898096p1fedcejsn9038057e8d3c',
-        },
-      }),
-    ]).then(allResponses => {
-      const response1 = allResponses[0].data.ITEMS;
-      const response2 = allResponses[1].data.ITEMS;
-      const response3 = allResponses[2].data.ITEMS;
-      const response4 = allResponses[3].data.ITEMS;
-      const response5 = allResponses[4].data.ITEMS;
-      const response6 = allResponses[5].data.ITEMS;
-      const response7 = allResponses[6].data.ITEMS;
-      const movieData = response1.concat(response2, response3, response4, response5, response6, response7);
+
+  getData(genreid) {
+    axios.get(`https://unogs-unogs-v1.p.rapidapi.com/aaapi.cgi?q=0-!1900%2C2018-!0%2C5-!0%2C10-!${genreid}-!Any-!Any-!Any-!gt100-!%7Bdownloadable%7D&t=ns&cl=46&st=adv&ob=Relevance&p=1&sa=and`, {
+      headers: {
+        'x-rapidapi-host': 'unogs-unogs-v1.p.rapidapi.com',
+        'x-rapidapi-key': 'e53590f299mshe3f80deda898096p1fedcejsn9038057e8d3c',
+      },
+    }).then(response => {
+      const movieData = response.data.ITEMS;
       this.setState({ movieList: movieData });
       console.log(movieData);
+      this.pickMovie();
     });
   }
 
@@ -85,6 +44,7 @@ class Moviedb extends React.Component {
     if (!check) {
       this.setState({ currentMovie: randomMovie.title });
       this.setState({ image: randomMovie.image });
+      this.setState({ synopsis: randomMovie.synopsis });
     } else {
       this.pickMovie();
     }
@@ -93,17 +53,13 @@ class Moviedb extends React.Component {
   saveMovie() {
     const index = this.state.movieList.findIndex(x => x === (this.state.currentMovie));
     this.state.movieList.splice(index, 1);
-    Axios.post('http://localhost:8080/filmfinder/user/movie', {
+    axios.post('http://localhost:8080/filmfinder/users/movie', {
       email: this.props.user.email,
       movie: this.state.currentMovie,
       movieImage: this.state.image,
     });
     console.log(this.state.movieList);
     console.log(this.state.pastMovies);
-  }
-
-  componentDidMount() {
-    this.getData();
   }
 
   handleSearchButton() {
@@ -114,21 +70,33 @@ class Moviedb extends React.Component {
     this.saveMovie();
   }
 
+  setGenreID(event) {
+    const genre = event.target.value;
+    this.setState({ movieList: null });
+    this.getData(genre);
+  }
+
   render() {
     return (
       <div>
         <SearchButton
           onClick={this.handleSearchButton}
         />
-        <SaveButton
-          onClick={this.handleSaveButton}
-        />
+
+        <button onClick={this.setGenreID} value="6548">Comedy</button>
+        <button onClick={this.setGenreID} value="1365">Action & Adventure</button>
+        <button onClick={this.setGenreID} value="783">Kids Movies</button>
+        <button onClick={this.setGenreID} value="5824">Crime Films</button>
+        <button onClick={this.setGenreID} value="5763">Drama</button>
+
         <div className="image">
-          <img src={this.state.image} alt="blah" />
+          <img src={this.state.image} alt="movie-poster" />
         </div>
-        <div>
-          {this.state.currentMovie}
+        {this.state.currentMovie && <SaveButton onClick={this.handleSaveButton} />}
+        <div className="title">
+          <h2>{this.state.currentMovie}</h2>
         </div>
+        <div className="synopsis">{this.state.synopsis}</div>
       </div>
     );
   }
