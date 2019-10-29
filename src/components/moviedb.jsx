@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import SearchButton from './searchButton';
 import SaveButton from './saveButton';
+import DropdownButton from './dropdown-button';
 
 class Moviedb extends React.Component {
   constructor(props) {
@@ -15,11 +16,10 @@ class Moviedb extends React.Component {
       genreID: null,
     };
     this.getData = this.getData.bind(this);
-    this.handleSearchButton = this.handleSearchButton.bind(this);
     this.handleSaveButton = this.handleSaveButton.bind(this);
     this.pickMovie = this.pickMovie.bind(this);
     this.saveMovie = this.saveMovie.bind(this);
-    this.setGenreID = this.setGenreID.bind(this);
+    this.setGenre = this.setGenre.bind(this);
   }
 
 
@@ -62,15 +62,11 @@ class Moviedb extends React.Component {
     console.log(this.state.pastMovies);
   }
 
-  handleSearchButton() {
-    this.pickMovie();
-  }
-
   handleSaveButton() {
     this.saveMovie();
   }
 
-  setGenreID(event) {
+  setGenre(event) {
     const genre = event.target.value;
     this.setState({ movieList: null });
     this.getData(genre);
@@ -79,15 +75,8 @@ class Moviedb extends React.Component {
   render() {
     return (
       <div>
-        <SearchButton
-          onClick={this.handleSearchButton}
-        />
 
-        <button onClick={this.setGenreID} value="6548">Comedy</button>
-        <button onClick={this.setGenreID} value="1365">Action & Adventure</button>
-        <button onClick={this.setGenreID} value="783">Kids Movies</button>
-        <button onClick={this.setGenreID} value="5824">Crime Films</button>
-        <button onClick={this.setGenreID} value="5763">Drama</button>
+        <DropdownButton onClick={this.setGenre} />
 
         <div className="image">
           <img src={this.state.image} alt="movie-poster" />
