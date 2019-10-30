@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
-import SearchButton from './searchButton';
 import SaveButton from './saveButton';
+import SearchButton from './searchButton';
 import DropdownButton from './dropdown-button';
 
 class Moviedb extends React.Component {
@@ -13,7 +13,6 @@ class Moviedb extends React.Component {
       currentMovie: null,
       image: null,
       synopsis: null,
-      genreID: null,
     };
     this.getData = this.getData.bind(this);
     this.handleSaveButton = this.handleSaveButton.bind(this);
@@ -23,8 +22,8 @@ class Moviedb extends React.Component {
   }
 
 
-  getData(genreid) {
-    axios.get(`https://unogs-unogs-v1.p.rapidapi.com/aaapi.cgi?q=0-!1900%2C2018-!0%2C5-!0%2C10-!${genreid}-!Any-!Any-!Any-!gt100-!%7Bdownloadable%7D&t=ns&cl=46&st=adv&ob=Relevance&p=1&sa=and`, {
+  getData(genre) {
+    axios.get(`https://unogs-unogs-v1.p.rapidapi.com/aaapi.cgi?q=0-!1900%2C2018-!0%2C5-!0%2C10-!${genre}-!Any-!Any-!Any-!gt100-!%7Bdownloadable%7D&t=ns&cl=46&st=adv&ob=Relevance&p=1&sa=and`, {
       headers: {
         'x-rapidapi-host': 'unogs-unogs-v1.p.rapidapi.com',
         'x-rapidapi-key': 'e53590f299mshe3f80deda898096p1fedcejsn9038057e8d3c',
@@ -74,14 +73,16 @@ class Moviedb extends React.Component {
 
   render() {
     return (
-      <div>
-
+      <div className="main-page">
         <DropdownButton onClick={this.setGenre} />
-
-        <div className="image">
-          <img src={this.state.image} alt="movie-poster" />
+        {this.state.currentMovie && (
+        <div className="movie-info">
+          <img src={this.state.image} alt={`movie-poster-for${this.state.currentMovie}`} />
+          <br />
+          <SearchButton onClick={this.pickMovie} />
+          <SaveButton onClick={this.handleSaveButton} />
         </div>
-        {this.state.currentMovie && <SaveButton onClick={this.handleSaveButton} />}
+        )}
         <div className="title">
           <h2>{this.state.currentMovie}</h2>
         </div>
