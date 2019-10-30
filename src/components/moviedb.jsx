@@ -1,7 +1,8 @@
 import React from 'react';
 import axios from 'axios';
-import SearchButton from './searchButton';
 import SaveButton from './saveButton';
+import SearchButton from './searchButton';
+import DropdownButton from './dropdown-button';
 
 class Moviedb extends React.Component {
   constructor(props) {
@@ -12,19 +13,17 @@ class Moviedb extends React.Component {
       currentMovie: null,
       image: null,
       synopsis: null,
-      genreID: null,
     };
     this.getData = this.getData.bind(this);
-    this.handleSearchButton = this.handleSearchButton.bind(this);
     this.handleSaveButton = this.handleSaveButton.bind(this);
     this.pickMovie = this.pickMovie.bind(this);
     this.saveMovie = this.saveMovie.bind(this);
-    this.setGenreID = this.setGenreID.bind(this);
+    this.setGenre = this.setGenre.bind(this);
   }
 
 
-  getData(genreid) {
-    axios.get(`https://unogs-unogs-v1.p.rapidapi.com/aaapi.cgi?q=0-!1900%2C2018-!0%2C5-!0%2C10-!${genreid}-!Any-!Any-!Any-!gt100-!%7Bdownloadable%7D&t=ns&cl=46&st=adv&ob=Relevance&p=1&sa=and`, {
+  getData(genre) {
+    axios.get(`https://unogs-unogs-v1.p.rapidapi.com/aaapi.cgi?q=0-!1900%2C2018-!0%2C5-!0%2C10-!${genre}-!Any-!Any-!Any-!gt100-!%7Bdownloadable%7D&t=ns&cl=46&st=adv&ob=Relevance&p=1&sa=and`, {
       headers: {
         'x-rapidapi-host': 'unogs-unogs-v1.p.rapidapi.com',
         'x-rapidapi-key': 'e53590f299mshe3f80deda898096p1fedcejsn9038057e8d3c',
@@ -62,15 +61,11 @@ class Moviedb extends React.Component {
     console.log(this.state.pastMovies);
   }
 
-  handleSearchButton() {
-    this.pickMovie();
-  }
-
   handleSaveButton() {
     this.saveMovie();
   }
 
-  setGenreID(event) {
+  setGenre(event) {
     const genre = event.target.value;
     this.setState({ movieList: null });
     this.getData(genre);
@@ -78,21 +73,16 @@ class Moviedb extends React.Component {
 
   render() {
     return (
-      <div>
-        <SearchButton
-          onClick={this.handleSearchButton}
-        />
-
-        <button onClick={this.setGenreID} value="6548">Comedy</button>
-        <button onClick={this.setGenreID} value="1365">Action & Adventure</button>
-        <button onClick={this.setGenreID} value="783">Kids Movies</button>
-        <button onClick={this.setGenreID} value="5824">Crime Films</button>
-        <button onClick={this.setGenreID} value="5763">Drama</button>
-
-        <div className="image">
-          <img src={this.state.image} alt="movie-poster" />
+      <div className="main-page">
+        <DropdownButton onClick={this.setGenre} />
+        {this.state.currentMovie && (
+        <div className="movie-info">
+          <img src={this.state.image} alt={`movie-poster-for${this.state.currentMovie}`} />
+          <br />
+          <SearchButton onClick={this.pickMovie} />
+          <SaveButton onClick={this.handleSaveButton} />
         </div>
-        {this.state.currentMovie && <SaveButton onClick={this.handleSaveButton} />}
+        )}
         <div className="title">
           <h2>{this.state.currentMovie}</h2>
         </div>
