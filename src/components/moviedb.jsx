@@ -73,7 +73,7 @@ class Moviedb extends React.Component {
 
   render() {
     return (
-      <div className="main-page">
+      <div className="container">
         <DropdownButton onClick={this.setGenre} />
         {this.state.currentMovie && (
         <div className="movie-info">
