@@ -3,6 +3,7 @@ import axios from 'axios';
 import SaveButton from './saveButton';
 import SearchButton from './searchButton';
 import DropdownButton from './dropdown-button';
+import '../styles/moviedb.css';
 
 class Moviedb extends React.Component {
   constructor(props) {
@@ -81,12 +82,12 @@ class Moviedb extends React.Component {
           <br />
           <SearchButton onClick={this.pickMovie} />
           <SaveButton onClick={this.handleSaveButton} />
+          <div className="title">
+            <h2>{this.state.currentMovie}</h2>
+          </div>
+          <div className="synopsis">{this.state.synopsis}</div>
         </div>
         )}
-        <div className="title">
-          <h2>{this.state.currentMovie}</h2>
-        </div>
-        <div className="synopsis">{this.state.synopsis}</div>
       </div>
     );
   }

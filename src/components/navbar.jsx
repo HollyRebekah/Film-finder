@@ -13,12 +13,14 @@ const NavBar = (props) => {
       <div className="nav-bar-links">
         <Link to="/">
           <MdLocalMovies
-          size={28}
-        />
+            size={28}
+            color="white"
+          />
         </Link>
         <Link to="/user-account">
           <FaUser
             size={28}
+            color="white"
           />
         </Link>
       </div>
