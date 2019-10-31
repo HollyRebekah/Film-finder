@@ -41,7 +41,7 @@ class Login extends React.Component {
   render() {
     return (
       <div>
-        <h1>Login</h1>
+        <h1 className="login">Login</h1>
         <div>
           <label htmlFor="email">
             Email:
