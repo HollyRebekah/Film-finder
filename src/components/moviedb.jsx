@@ -13,6 +13,7 @@ class Moviedb extends React.Component {
       currentMovie: null,
       image: null,
       synopsis: null,
+      genre: null,
     };
     this.getData = this.getData.bind(this);
     this.handleSaveButton = this.handleSaveButton.bind(this);
@@ -22,13 +23,12 @@ class Moviedb extends React.Component {
   }
 
 
-  getData(genre) {
-    axios.get(`https://unogs-unogs-v1.p.rapidapi.com/aaapi.cgi?q=0-!1900%2C2018-!0%2C5-!0%2C10-!${genre}-!Any-!Any-!Any-!gt100-!%7Bdownloadable%7D&t=ns&cl=46&st=adv&ob=Relevance&p=1&sa=and`, {
-      headers: {
-        'x-rapidapi-host': 'unogs-unogs-v1.p.rapidapi.com',
-        'x-rapidapi-key': 'e53590f299mshe3f80deda898096p1fedcejsn9038057e8d3c',
-      },
+  getData() {
+    console.log(this.state.genre);
+    axios.get('http://localhost:8080/filmfinder/movies', {
+      genre: this.state.genre,
     }).then(response => {
+      console.log(response);
       const movieData = response.data.ITEMS;
       this.setState({ movieList: movieData });
       console.log(movieData);
@@ -67,8 +67,11 @@ class Moviedb extends React.Component {
 
   setGenre(event) {
     const genre = event.target.value;
+    console.log(genre);
+    this.setState({ genre: genre });
+    console.log(this.state.genre);
     this.setState({ movieList: null });
-    this.getData(genre);
+    this.getData();
   }
 
   render() {
