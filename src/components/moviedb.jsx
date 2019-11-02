@@ -13,25 +13,23 @@ class Moviedb extends React.Component {
       currentMovie: null,
       image: null,
       synopsis: null,
-      genre: null,
     };
     this.getData = this.getData.bind(this);
     this.handleSaveButton = this.handleSaveButton.bind(this);
     this.pickMovie = this.pickMovie.bind(this);
     this.saveMovie = this.saveMovie.bind(this);
-    this.setGenre = this.setGenre.bind(this);
   }
 
 
-  getData() {
-    console.log(this.state.genre);
-    axios.get('http://localhost:8080/filmfinder/movies', {
-      genre: this.state.genre,
+  getData(event) {
+    console.log(event.target.value);
+    axios.post('http://localhost:8080/filmfinder/movies/genre', {
+      genre: event.target.value,
     }).then(response => {
       console.log(response);
-      const movieData = response.data.ITEMS;
-      this.setState({ movieList: movieData });
+      const movieData = response.data;
       console.log(movieData);
+      this.setState({ movieList: movieData });
       this.pickMovie();
     });
   }
@@ -65,19 +63,10 @@ class Moviedb extends React.Component {
     this.saveMovie();
   }
 
-  setGenre(event) {
-    const genre = event.target.value;
-    console.log(genre);
-    this.setState({ genre: genre });
-    console.log(this.state.genre);
-    this.setState({ movieList: null });
-    this.getData();
-  }
-
   render() {
     return (
       <div className="container">
-        <DropdownButton onClick={this.setGenre} />
+        <DropdownButton onClick={this.getData} />
         {this.state.currentMovie && (
         <div className="movie-info">
           <img src={this.state.image} alt={`movie-poster-for${this.state.currentMovie}`} />
