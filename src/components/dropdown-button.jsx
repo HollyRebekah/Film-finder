@@ -12,11 +12,11 @@ const DropdownButton = (props) => {
           onChange={props.onClick}
         >
           <option>Pick a genre...</option>
-          <option value="1365">Action & Adventure</option>
-          <option value="6548">Comedy</option>
-          <option value="5824">Crime</option>
-          <option value="5763">Drama</option>
-          <option value="783">Kids</option>
+          <option value="action">Action & Adventure</option>
+          <option value="comedy">Comedy</option>
+          <option value="crime">Crime</option>
+          <option value="drama">Drama</option>
+          <option value="kids">Kids</option>
         </select>
       </div>
     </div>

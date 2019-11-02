@@ -19,20 +19,18 @@ class Moviedb extends React.Component {
     this.handleSaveButton = this.handleSaveButton.bind(this);
     this.pickMovie = this.pickMovie.bind(this);
     this.saveMovie = this.saveMovie.bind(this);
-    this.setGenre = this.setGenre.bind(this);
   }
 
 
-  getData(genre) {
-    axios.get(`https://unogs-unogs-v1.p.rapidapi.com/aaapi.cgi?q=0-!1900%2C2018-!0%2C5-!0%2C10-!${genre}-!Any-!Any-!Any-!gt100-!%7Bdownloadable%7D&t=ns&cl=46&st=adv&ob=Relevance&p=1&sa=and`, {
-      headers: {
-        'x-rapidapi-host': 'unogs-unogs-v1.p.rapidapi.com',
-        'x-rapidapi-key': 'e53590f299mshe3f80deda898096p1fedcejsn9038057e8d3c',
-      },
+  getData(event) {
+    console.log(event.target.value);
+    axios.post('http://localhost:8080/filmfinder/movies/genre', {
+      genre: event.target.value,
     }).then(response => {
-      const movieData = response.data.ITEMS;
-      this.setState({ movieList: movieData });
+      console.log(response);
+      const movieData = response.data;
       console.log(movieData);
+      this.setState({ movieList: movieData });
       this.pickMovie();
     });
   }
@@ -66,16 +64,10 @@ class Moviedb extends React.Component {
     this.saveMovie();
   }
 
-  setGenre(event) {
-    const genre = event.target.value;
-    this.setState({ movieList: null });
-    this.getData(genre);
-  }
-
   render() {
     return (
       <div className="container">
-        <DropdownButton onClick={this.setGenre} />
+        <DropdownButton onClick={this.getData} />
         {this.state.currentMovie && (
         <div className="movie-info">
           <img src={this.state.image} alt={`movie-poster-for${this.state.currentMovie}`} />
