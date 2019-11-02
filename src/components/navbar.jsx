@@ -8,7 +8,7 @@ const NavBar = (props) => {
   return (
     <div className="nav-bar">
       <div className="title">
-        IndeciFlix
+        NetPick
       </div>
       <div className="nav-bar-links">
         <Link to="/">

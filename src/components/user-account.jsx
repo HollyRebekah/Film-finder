@@ -8,7 +8,7 @@ const UserAccount = (props) => {
       <div>Name: {props.user.firstName} {props.user.lastName}</div>
       <div>Movies I've Watched:{props.user.filmImages.map((image) => {
         return (
-          <li className="movie-list" key={props.user.filmImages.indexOf(image)}><img src={image} /></li>
+          <li className="movie-list" key={props.user.filmImages.indexOf(image)}><img className="movie-image" src={image} /></li>
         );
       })}
       </div>
