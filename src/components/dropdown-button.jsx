@@ -1,11 +1,13 @@
 import React from 'react';
+import '../styles/dropdown.css';
 
 const DropdownButton = (props) => {
   return (
-    <div className="container">
+    <div className="container" id="dropdown">
       <div className="row">
-        <h2>What type of film do you want to watch?</h2>
+        <h2 className="heading">What type of film do you want to watch?</h2>
         <select
+          className="options"
           name="genre"
           onChange={props.onClick}
         >
