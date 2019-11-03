@@ -70,6 +70,7 @@ class signUp extends React.Component {
           </div>
           <div className="password">
             Password: <input
+              type="password"
               name="password"
               placeholder="Password"
               value={this.state.fields.password}

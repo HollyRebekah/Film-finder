@@ -58,7 +58,7 @@ class Moviedb extends React.Component {
 
   render() {
     return (
-      <div className="container">
+      <div className="movie-page">
         <DropdownButton onClick={this.getData} />
         {this.state.currentMovie && (
         <div className="movie-info">
