@@ -6,6 +6,7 @@ import SignUp from './components/signup';
 import NavBar from './components/navbar';
 import TokenManager from './utils/token-manager';
 import UserAccount from './components/user-account';
+import './styles/App.css'
 
 class App extends React.Component {
   constructor(props) {
@@ -28,7 +29,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="app">
         <NavBar
           user={this.state.user}
         />
@@ -37,7 +38,7 @@ class App extends React.Component {
             exact
             path="/"
             render={props => (this.state.user ?
-              <Moviedb {...props} user={this.state.user} /> :
+              <Moviedb {...props} user={this.state.user} onSave={this.handleLogin} /> :
               <Redirect to="/login" />
             )}
           />

@@ -10,13 +10,11 @@ class UserAccount extends React.Component {
     };
   }
 
-
   componentDidMount() {
     axios.post(
       'http://localhost:8080/filmfinder/movies/image',
       { title: this.props.user.filmsWatched }
     ).then(response => {
-      console.log(response.data);
       this.setState({
         images: response.data,
       });
@@ -25,14 +23,15 @@ class UserAccount extends React.Component {
 
   render() {
     return (
-      <div className="user-info-page">
-        <h1>User Info</h1>
-        <div>Name: {this.props.user.firstName} {this.props.user.lastName}</div>
-        <div>Movies I've Watched:{this.state.images.map((image) => {
-          return (
-            <li className="movie-list" key={this.state.images.indexOf(image)}><img className="movie" alt="movie" src={image} /></li>
-          );
-        })}
+      <div className="user-account">
+        <h1>User: {this.props.user.firstName} {this.props.user.lastName}</h1>
+        <div>{this.props.user.firstName} has watched...</div>
+        <div className="movie-list">
+          {this.state.images.map((image) => {
+            return (
+              <li className="movie-images" key={this.state.images.indexOf(image)}><img className="movie" alt="movie" src={image} /></li>
+            );
+          })}
         </div>
       </div>
     );

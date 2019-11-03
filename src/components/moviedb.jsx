@@ -16,7 +16,6 @@ class Moviedb extends React.Component {
       synopsis: null,
     };
     this.getData = this.getData.bind(this);
-    this.handleSaveButton = this.handleSaveButton.bind(this);
     this.pickMovie = this.pickMovie.bind(this);
     this.saveMovie = this.saveMovie.bind(this);
   }
@@ -55,12 +54,6 @@ class Moviedb extends React.Component {
       email: this.props.user.email,
       movie: this.state.currentMovie,
     });
-    console.log(this.state.movieList);
-    console.log(this.state.pastMovies);
-  }
-
-  handleSaveButton() {
-    this.saveMovie();
   }
 
   render() {
@@ -72,7 +65,7 @@ class Moviedb extends React.Component {
           <img src={this.state.image} alt={`movie-poster-for${this.state.currentMovie}`} />
           <br />
           <SearchButton onClick={this.pickMovie} />
-          <SaveButton onClick={this.handleSaveButton} />
+          <SaveButton onClick={this.saveMovie} />
           <div className="title">
             <h2>{this.state.currentMovie}</h2>
           </div>
