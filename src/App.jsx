@@ -38,7 +38,7 @@ class App extends React.Component {
             exact
             path="/"
             render={props => (this.state.user ?
-              <Moviedb {...props} user={this.state.user} onSave={this.handleLogin} /> :
+              <Moviedb {...props} user={this.state.user} /> :
               <Redirect to="/login" />
             )}
           />
@@ -52,7 +52,9 @@ class App extends React.Component {
           <Route
             exact
             path="/sign-up"
-            component={SignUp}
+            render={props => (
+              <SignUp {...props} onSignUp={this.handleLogin} />
+            )}
           />
 
           <Route

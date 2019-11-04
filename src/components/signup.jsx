@@ -24,11 +24,8 @@ class signUp extends React.Component {
       email: this.state.fields.email,
       password: this.state.fields.password,
     })
-      .then(res => {
-        console.log(res);
-      })
-      .catch(error => {
-        console.log(error);
+      .then(() => {
+        this.props.history.push('/login');
       });
     event.preventDefault();
   };
