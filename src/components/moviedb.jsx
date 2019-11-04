@@ -3,6 +3,7 @@ import axios from 'axios';
 import SaveButton from './saveButton';
 import SearchButton from './searchButton';
 import DropdownButton from './dropdown-button';
+import He from 'he';
 import '../styles/moviedb.css';
 
 class Moviedb extends React.Component {
@@ -39,9 +40,9 @@ class Moviedb extends React.Component {
     const randomMovie = this.state.movieList[randomNumber];
     const check = this.state.pastMovies.includes(randomMovie.title);
     if (!check) {
-      this.setState({ currentMovie: randomMovie.title });
+      this.setState({ currentMovie: He.decode(randomMovie.title) });
       this.setState({ image: randomMovie.image });
-      this.setState({ synopsis: randomMovie.synopsis });
+      this.setState({ synopsis: He.decode(randomMovie.synopsis) });
     } else {
       this.pickMovie();
     }

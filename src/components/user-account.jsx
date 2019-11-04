@@ -24,7 +24,7 @@ class UserAccount extends React.Component {
   render() {
     return (
       <div className="user-account">
-        <h1>User: {this.props.user.firstName} {this.props.user.lastName}</h1>
+        <h1>User: {this.props.user.firstName}</h1>
         <div>{this.props.user.firstName} has watched...</div>
         <div className="movie-list">
           {this.state.images.map((image) => {
