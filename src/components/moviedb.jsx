@@ -6,6 +6,7 @@ import DropdownButton from './dropdown-button';
 import He from 'he';
 import '../styles/moviedb.css';
 
+
 class Moviedb extends React.Component {
   constructor(props) {
     super(props);
@@ -64,9 +65,11 @@ class Moviedb extends React.Component {
         {this.state.currentMovie && (
         <div className="movie-info">
           <img src={this.state.image} alt={`movie-poster-for${this.state.currentMovie}`} />
-          <br />
-          <SearchButton onClick={this.pickMovie} />
-          <SaveButton onClick={this.saveMovie} />
+          <div className="buttons">
+            <SearchButton onClick={this.pickMovie} />
+            <div className="divider" />
+            <SaveButton onClick={this.saveMovie} />
+          </div>
           <div className="title">
             <h2>{this.state.currentMovie}</h2>
           </div>

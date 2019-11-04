@@ -1,8 +1,9 @@
 import React from 'react';
+import '../styles/button.css';
 
 const SearchButton = (props) => {
   return (
-    <button onClick={props.onClick}>Pick me another</button>
+    <button className="movie-button" onClick={props.onClick}>Pick me another</button>
   );
 };
 
