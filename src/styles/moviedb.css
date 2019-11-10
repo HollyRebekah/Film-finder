@@ -6,3 +6,13 @@ body{
 .movie-page{
     text-align: center;
 }
+
+.buttons{
+    padding:5px;
+}
+
+.divider{
+    width:5px;
+    height:auto;
+    display:inline-block;
+}

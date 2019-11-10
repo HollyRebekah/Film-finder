@@ -29,7 +29,7 @@ class UserAccount extends React.Component {
         <div className="movie-list">
           {this.state.images.map((image) => {
             return (
-              <li className="movie-images" key={this.state.images.indexOf(image)}><img className="movie" alt="movie" src={image} /></li>
+              <li className="movie-image" key={this.state.images.indexOf(image)}><img className="movie" alt="movie" src={image} /></li>
             );
           })}
         </div>
