@@ -3,6 +3,7 @@ import axios from 'axios';
 import SaveButton from './saveButton';
 import SearchButton from './searchButton';
 import DropdownButton from './dropdown-button';
+import MovieInfo from './movie-info';
 import He from 'he';
 import Loader from 'react-loader-spinner';
 import '../styles/moviedb.css';
@@ -26,7 +27,10 @@ class Moviedb extends React.Component {
 
 
   getData(event) {
-    this.setState({ loading: true });
+    this.setState({
+      loading: true,
+      currentMovie: null,
+    });
     axios.post('http://localhost:8080/filmfinder/movies/genre', {
       genre: event.target.value,
     }).then(response => {
@@ -77,20 +81,17 @@ class Moviedb extends React.Component {
           />
         )}
         {this.state.currentMovie && (
-        <div className="movie-info">
-          <img
-            src={this.state.image}
-            alt={`movie-poster-for${this.state.currentMovie}`}
+        <div className="movie-details">
+          <MovieInfo
+            image={this.state.image}
+            title={this.state.currentMovie}
+            synopsis={this.state.synopsis}
           />
           <div className="buttons">
             <SearchButton onClick={this.pickMovie} />
             <div className="divider" />
             <SaveButton onClick={this.saveMovie} />
           </div>
-          <div className="title">
-            <h2>{this.state.currentMovie}</h2>
-          </div>
-          <div className="synopsis">{this.state.synopsis}</div>
         </div>
         )}
       </div>
