@@ -10,7 +10,7 @@ const NavBar = (props) => {
       <div className="title">
         NetPick
       </div>
-      <div className="nav-bar-links">
+      <div className="links">
         <Link to="/">
           <MdLocalMovies
             size={32}
