@@ -4,8 +4,11 @@ import SaveButton from './saveButton';
 import SearchButton from './searchButton';
 import DropdownButton from './dropdown-button';
 import CommentBox from './comment-box';
+import MovieInfo from './movie-info';
 import He from 'he';
+import Loader from 'react-loader-spinner';
 import '../styles/moviedb.css';
+
 
 class Moviedb extends React.Component {
   constructor(props) {
@@ -17,6 +20,7 @@ class Moviedb extends React.Component {
       image: null,
       synopsis: null,
       showPopup: false,
+      loading: false,
     };
     this.getData = this.getData.bind(this);
     this.pickMovie = this.pickMovie.bind(this);
@@ -27,14 +31,14 @@ class Moviedb extends React.Component {
   }
 
   handleSubmitNewComment = (event) => {
-    console.log(event.target.value);
-    axios.post('http://localhost8080/filmfinder/movies', {
-      title: this.state.currentMovie.title,
+    console.log(this.state.currentMovie);
+    axios.post('http://localhost:8080/filmfinder/movies', {
+      title: this.state.currentMovie,
       comment: event.target.value,
     })
-    .catch((error) => {
-      console.log(error);
-    })
+      .then(response => {
+        console.log(response);
+      });
   };
 
   togglePopup() {
@@ -50,14 +54,18 @@ class Moviedb extends React.Component {
   }
 
   getData(event) {
-    console.log(event.target.value);
+    this.setState({
+      loading: true,
+      currentMovie: null,
+    });
     axios.post('http://localhost:8080/filmfinder/movies/genre', {
       genre: event.target.value,
     }).then(response => {
-      console.log(response);
       const movieData = response.data;
-      console.log(movieData);
-      this.setState({ movieList: movieData });
+      this.setState({
+        movieList: movieData,
+        currentMovie: null,
+      });
       this.pickMovie();
     });
   }
@@ -67,9 +75,12 @@ class Moviedb extends React.Component {
     const randomMovie = this.state.movieList[randomNumber];
     const check = this.state.pastMovies.includes(randomMovie.title);
     if (!check) {
-      this.setState({ currentMovie: He.decode(randomMovie.title) });
-      this.setState({ image: randomMovie.image });
-      this.setState({ synopsis: He.decode(randomMovie.synopsis) });
+      this.setState({
+        currentMovie: He.decode(randomMovie.title),
+        image: randomMovie.image,
+        synopsis: He.decode(randomMovie.synopsis),
+        loading: false,
+      });
     } else {
       this.pickMovie();
     }
@@ -89,25 +100,38 @@ class Moviedb extends React.Component {
     return (
       <div className="movie-page">
         <DropdownButton onClick={this.getData} />
-        {this.state.currentMovie && (
-        <div className="movie-info">
-          <img src={this.state.image} alt={`movie-poster-for${this.state.currentMovie}`} />
-          <br />
-          <SearchButton onClick={this.pickMovie} />
-          <SaveButton onClick={this.saveMovie} />
-          {this.state.showPopup ? (
-            <CommentBox
+        {this.state.loading && (
+          <Loader
+            type="TailSpin"
+            color="#FFF"
+            height={100}
+            width={100}
+          />
+        )}
+
+        {this.state.showPopup ? (
+          <CommentBox
               text="What did you think of it?"
               onClose={this.closePopup}
               onSubmit={this.handleSubmitNewComment}
             />
-          ) : null
+        ) : null
           }
-          <div className="title">
-            <h2>{this.state.currentMovie}</h2>
+
+
+        {this.state.currentMovie && (
+        <div className="movie-details">
+              <MovieInfo
+            image={this.state.image}
+            title={this.state.currentMovie}
+            synopsis={this.state.synopsis}
+          />
+              <div className="buttons">
+            <SearchButton onClick={this.pickMovie} />
+            <div className="divider" />
+            <SaveButton onClick={this.saveMovie} />
           </div>
-          <div className="synopsis">{this.state.synopsis}</div>
-        </div>
+            </div>
         )}
       </div>
     );

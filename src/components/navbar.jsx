@@ -8,18 +8,18 @@ const NavBar = (props) => {
   return (
     <div className="nav-bar">
       <div className="title">
-        NetPick
+        NetPix
       </div>
-      <div className="nav-bar-links">
+      <div className="links">
         <Link to="/">
           <MdLocalMovies
-            size={28}
+            size={32}
             color="white"
           />
         </Link>
         <Link to="/user-account">
           <FaUser
-            size={28}
+            size={30}
             color="white"
           />
         </Link>
