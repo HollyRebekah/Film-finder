@@ -3,7 +3,9 @@ import axios from 'axios';
 import SaveButton from './saveButton';
 import SearchButton from './searchButton';
 import DropdownButton from './dropdown-button';
+import MovieInfo from './movie-info';
 import He from 'he';
+import Loader from 'react-loader-spinner';
 import '../styles/moviedb.css';
 
 
@@ -16,6 +18,7 @@ class Moviedb extends React.Component {
       currentMovie: null,
       image: null,
       synopsis: null,
+      loading: false,
     };
     this.getData = this.getData.bind(this);
     this.pickMovie = this.pickMovie.bind(this);
@@ -24,14 +27,18 @@ class Moviedb extends React.Component {
 
 
   getData(event) {
-    console.log(event.target.value);
+    this.setState({
+      loading: true,
+      currentMovie: null,
+    });
     axios.post('http://localhost:8080/filmfinder/movies/genre', {
       genre: event.target.value,
     }).then(response => {
-      console.log(response);
       const movieData = response.data;
-      console.log(movieData);
-      this.setState({ movieList: movieData });
+      this.setState({
+        movieList: movieData,
+        currentMovie: null,
+      });
       this.pickMovie();
     });
   }
@@ -41,9 +48,12 @@ class Moviedb extends React.Component {
     const randomMovie = this.state.movieList[randomNumber];
     const check = this.state.pastMovies.includes(randomMovie.title);
     if (!check) {
-      this.setState({ currentMovie: He.decode(randomMovie.title) });
-      this.setState({ image: randomMovie.image });
-      this.setState({ synopsis: He.decode(randomMovie.synopsis) });
+      this.setState({
+        currentMovie: He.decode(randomMovie.title),
+        image: randomMovie.image,
+        synopsis: He.decode(randomMovie.synopsis),
+        loading: false,
+      });
     } else {
       this.pickMovie();
     }
@@ -62,18 +72,26 @@ class Moviedb extends React.Component {
     return (
       <div className="movie-page">
         <DropdownButton onClick={this.getData} />
+        {this.state.loading && (
+          <Loader
+            type="TailSpin"
+            color="#FFF"
+            height={100}
+            width={100}
+          />
+        )}
         {this.state.currentMovie && (
-        <div className="movie-info">
-          <img src={this.state.image} alt={`movie-poster-for${this.state.currentMovie}`} />
+        <div className="movie-details">
+          <MovieInfo
+            image={this.state.image}
+            title={this.state.currentMovie}
+            synopsis={this.state.synopsis}
+          />
           <div className="buttons">
             <SearchButton onClick={this.pickMovie} />
             <div className="divider" />
             <SaveButton onClick={this.saveMovie} />
           </div>
-          <div className="title">
-            <h2>{this.state.currentMovie}</h2>
-          </div>
-          <div className="synopsis">{this.state.synopsis}</div>
         </div>
         )}
       </div>

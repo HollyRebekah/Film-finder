@@ -8,9 +8,9 @@ const NavBar = (props) => {
   return (
     <div className="nav-bar">
       <div className="title">
-        NetPick
+        NetPix
       </div>
-      <div className="nav-bar-links">
+      <div className="links">
         <Link to="/">
           <MdLocalMovies
             size={32}

@@ -10,6 +10,8 @@
     color:#FFFFFF;
     text-align:center;
     transition: all 0.2s;
+    margin-top: 5px;
+    
 }
 
 .movie-button:hover{

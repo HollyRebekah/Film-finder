@@ -1,5 +1,7 @@
 import React from 'react';
 import Axios from 'axios';
+import '../styles/button.css';
+import '../styles/sign-log.css';
 
 class signUp extends React.Component {
   constructor() {
@@ -38,11 +40,11 @@ class signUp extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="login-form">
         <h1>Sign up</h1>
         <form>
           <div className="first-name">
-            First Name: <input
+            <input
               name="firstName"
               placeholder="First Name"
               value={this.state.fields.firstName}
@@ -50,7 +52,7 @@ class signUp extends React.Component {
             />
           </div>
           <div className="last-name">
-            Last Name: <input
+            <input
               name="lastName"
               placeholder="Last Name"
               value={this.state.fields.lastName}
@@ -58,7 +60,7 @@ class signUp extends React.Component {
             />
           </div>
           <div className="email">
-            Email: <input
+            <input
               name="email"
               placeholder="Email"
               value={this.state.fields.email}
@@ -66,7 +68,7 @@ class signUp extends React.Component {
             />
           </div>
           <div className="password">
-            Password: <input
+            <input
               type="password"
               name="password"
               placeholder="Password"
@@ -77,6 +79,7 @@ class signUp extends React.Component {
           <button
             type="submit"
             onClick={this.handleCreateUser}
+            className="movie-button"
           >
             <label>Sign Up</label>
           </button>
