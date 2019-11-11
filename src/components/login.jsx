@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import TokenManager from '../utils/token-manager';
+import '../styles/button.css';
+import '../styles/sign-log.css';
 
 class Login extends React.Component {
   constructor(props) {
@@ -34,20 +36,20 @@ class Login extends React.Component {
         this.props.history.push('/');
       })
       .catch((error) => {
-        this.setState({ errorMessage: error.response.data.message });
+        this.setState({ errorMessage: 'The email/ password combination is incorrect. Please try again.' });
       });
   }
 
   render() {
     return (
-      <div>
+      <div className="login-form">
         <h1>Login</h1>
         <div>
           <label htmlFor="email">
-            Email:
             <input
               type="email"
               name="email"
+              placeholder="Email"
               value={this.state.email}
               onChange={this.handleInputChange}
             />
@@ -55,17 +57,21 @@ class Login extends React.Component {
         </div>
         <div>
           <label htmlFor="email">
-            Password:
             <input
               type="password"
               name="password"
+              placeholder="Password"
               value={this.state.password}
               onChange={this.handleInputChange}
             />
           </label>
         </div>
-        <div>
-          <button onClick={this.handleLogin}>Login</button> or <Link to="/sign-up">Sign Up</Link>
+        <div className="actions">
+          <button
+            onClick={this.handleLogin}
+            className="movie-button"
+          >Login
+          </button> or <Link to="/sign-up">Sign Up</Link>
         </div>
         {
           this.state.errorMessage &&
