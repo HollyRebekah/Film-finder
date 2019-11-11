@@ -3,6 +3,7 @@ import axios from 'axios';
 import SaveButton from './saveButton';
 import SearchButton from './searchButton';
 import DropdownButton from './dropdown-button';
+import CommentBox from './comment-box';
 import He from 'he';
 import '../styles/moviedb.css';
 
@@ -15,12 +16,38 @@ class Moviedb extends React.Component {
       currentMovie: null,
       image: null,
       synopsis: null,
+      showPopup: false,
     };
     this.getData = this.getData.bind(this);
     this.pickMovie = this.pickMovie.bind(this);
     this.saveMovie = this.saveMovie.bind(this);
+    this.togglePopup = this.togglePopup.bind(this);
+    this.closePopup = this.closePopup.bind(this);
+    this.handleSubmitNewComment = this.handleSubmitNewComment.bind(this);
   }
 
+  handleSubmitNewComment = (event) => {
+    console.log(event.target.value);
+    axios.post('http://localhost8080/filmfinder/movies', {
+      title: this.state.currentMovie.title,
+      comment: event.target.value,
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+  };
+
+  togglePopup() {
+    this.setState({
+      showPopup: true,
+    });
+  }
+
+  closePopup() {
+    this.setState({
+      showPopup: false,
+    });
+  }
 
   getData(event) {
     console.log(event.target.value);
@@ -55,6 +82,7 @@ class Moviedb extends React.Component {
       email: this.props.user.email,
       movie: this.state.currentMovie,
     });
+    this.togglePopup();
   }
 
   render() {
@@ -67,6 +95,14 @@ class Moviedb extends React.Component {
           <br />
           <SearchButton onClick={this.pickMovie} />
           <SaveButton onClick={this.saveMovie} />
+          {this.state.showPopup ? (
+            <CommentBox
+              text="What did you think of it?"
+              onClose={this.closePopup}
+              onSubmit={this.handleSubmitNewComment}
+            />
+          ) : null
+          }
           <div className="title">
             <h2>{this.state.currentMovie}</h2>
           </div>
