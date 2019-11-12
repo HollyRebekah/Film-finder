@@ -7,24 +7,21 @@ class signUp extends React.Component {
   constructor() {
     super();
     this.state = {
-      fields: {
-        firstName: '',
-        lastName: '',
-        email: '',
-        password: '',
-      },
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
       errors: {},
     };
   }
 
   handleCreateUser = (event) => {
-    console.log('Hello');
     Axios.post('http://localhost:8080/filmfinder/users', {
       withCredentials: true,
-      firstName: this.state.fields.firstName,
-      lastName: this.state.fields.lastName,
-      email: this.state.fields.email,
-      password: this.state.fields.password,
+      firstName: this.state.firstName,
+      lastName: this.state.lastName,
+      email: this.state.email,
+      password: this.state.password,
     })
       .then(() => {
         this.props.history.push('/login');
@@ -33,9 +30,7 @@ class signUp extends React.Component {
   };
 
   handleFieldChange = (event) => {
-    this.setState({
-      fields: { ...this.state.fields, [event.target.name]: event.target.value },
-    });
+    this.setState({ [event.target.name]: event.target.value });
   };
 
   render() {

@@ -25,14 +25,17 @@ class UserAccount extends React.Component {
   }
 
   render() {
+    const { firstName } = this.props.user;
+    const { images } = this.state;
+
     return (
       <div className="user-account">
-        <h1>User: {this.props.user.firstName}</h1>
-        <div>{this.props.user.firstName} has watched...</div>
+        <h1>User: {firstName}</h1>
+        <div>{firstName} has watched...</div>
         <div className="movie-list">
-          {this.state.images.map((image) => {
+          {images.map((image, i) => {
             return (
-              <li className="movie-image" key={this.state.images.indexOf(image)}><img className="movie" alt="movie" src={image} /></li>
+              <li className="movie-image" key={`movie.${i}`}><img className="movie" alt="movie" src={image} /></li>
             );
           })}
         </div>
