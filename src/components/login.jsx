@@ -45,28 +45,24 @@ class Login extends React.Component {
       <div className="login-form">
         <h1>Login</h1>
         <div>
-          <label htmlFor="email">
-            <input
-              type="email"
-              name="email"
-              placeholder="Email"
-              value={this.state.email}
-              onChange={this.handleInputChange}
-            />
-          </label>
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={this.state.email}
+            onChange={this.handleInputChange}
+          />
         </div>
         <div>
-          <label htmlFor="email">
-            <input
-              type="password"
-              name="password"
-              placeholder="Password"
-              value={this.state.password}
-              onChange={this.handleInputChange}
-            />
-          </label>
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={this.state.password}
+            onChange={this.handleInputChange}
+          />
         </div>
-        <div className="actions">
+        <div>
           <Button
             onClick={this.handleLogin}
             className="movie-button"
