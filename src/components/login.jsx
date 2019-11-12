@@ -21,11 +21,10 @@ class Login extends React.Component {
 
   handleInputChange(event) {
     const { name, value } = event.target;
-
     this.setState({ [name]: value });
   }
 
-  handleLogin() {
+  handleLogin(event) {
     axios.post('http://localhost:8080/filmfinder/auth', {
       email: this.state.email,
       password: this.state.password,

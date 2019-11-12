@@ -1,12 +1,12 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import Moviedb from './components/moviedb';
-import Login from './components/login';
-import SignUp from './components/signup';
-import NavBar from './components/navbar';
+import Moviedb from './components/Moviedb';
+import Login from './components/Login';
+import SignUp from './components/SignUp';
+import NavBar from './components/NavBar';
 import TokenManager from './utils/token-manager';
-import UserAccount from './components/user-account';
-import './styles/App.css'
+import UserAccount from './components/User-Account';
+import './styles/App.css';
 
 class App extends React.Component {
   constructor(props) {

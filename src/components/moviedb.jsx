@@ -1,10 +1,9 @@
 import React from 'react';
 import axios from 'axios';
-import SaveButton from './saveButton';
-import SearchButton from './searchButton';
-import DropdownButton from './dropdown-button';
-import CommentBox from './comment-box';
-import MovieInfo from './movie-info';
+import Button from './Button';
+import DropdownButton from './Dropdown-Button';
+import CommentBox from './Comment-Box';
+import MovieInfo from './Movie-Info';
 import He from 'he';
 import Loader from 'react-loader-spinner';
 import '../styles/moviedb.css';
@@ -111,27 +110,33 @@ class Moviedb extends React.Component {
 
         {this.state.showPopup ? (
           <CommentBox
-              text="What did you think of it?"
-              onClose={this.closePopup}
-              onSubmit={this.handleSubmitNewComment}
-            />
+            text="What did you think of it?"
+            onClose={this.closePopup}
+            onSubmit={this.handleSubmitNewComment}
+          />
         ) : null
           }
 
 
         {this.state.currentMovie && (
         <div className="movie-details">
-              <MovieInfo
+          <MovieInfo
             image={this.state.image}
             title={this.state.currentMovie}
             synopsis={this.state.synopsis}
           />
-              <div className="buttons">
-            <SearchButton onClick={this.pickMovie} />
+          <div className="buttons">
+            <Button
+              onClick={this.pickMovie}
+              text="Pick me another"
+            />
             <div className="divider" />
-            <SaveButton onClick={this.saveMovie} />
+            <Button
+              onClick={this.saveMovie}
+              text="I watched this!"
+            />
           </div>
-            </div>
+        </div>
         )}
       </div>
     );
