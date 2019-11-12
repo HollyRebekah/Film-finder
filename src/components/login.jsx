@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import TokenManager from '../utils/token-manager';
+import Button from './Button';
 import '../styles/button.css';
 import '../styles/sign-log.css';
 
@@ -66,11 +67,11 @@ class Login extends React.Component {
           </label>
         </div>
         <div className="actions">
-          <button
+          <Button
             onClick={this.handleLogin}
             className="movie-button"
-          >Login
-          </button> or <Link to="/sign-up">Sign Up</Link>
+            text="Login"
+          /> or <Link to="/sign-up">Sign Up</Link>
         </div>
         {
           this.state.errorMessage &&

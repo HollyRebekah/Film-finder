@@ -87,7 +87,8 @@ class Moviedb extends React.Component {
 
   saveMovie() {
     const index = this.state.movieList.findIndex(x => x === (this.state.currentMovie));
-    this.state.movieList.splice(index, 1);
+    const newList = this.state.movieList.splice(index, 1);
+    this.setState({ movieList: newList });
     axios.post('http://localhost:8080/filmfinder/users/movie', {
       email: this.props.user.email,
       movie: this.state.currentMovie,
@@ -96,10 +97,14 @@ class Moviedb extends React.Component {
   }
 
   render() {
+    const {
+      loading, showPopup, currentMovie, image, synopsis,
+    } = this.state;
+
     return (
       <div className="movie-page">
         <DropdownButton onClick={this.getData} />
-        {this.state.loading && (
+        {loading && (
           <Loader
             type="TailSpin"
             color="#FFF"
@@ -108,7 +113,7 @@ class Moviedb extends React.Component {
           />
         )}
 
-        {this.state.showPopup ? (
+        {showPopup ? (
           <CommentBox
             text="What did you think of it?"
             onClose={this.closePopup}
@@ -118,12 +123,12 @@ class Moviedb extends React.Component {
           }
 
 
-        {this.state.currentMovie && (
+        {currentMovie && (
         <div className="movie-details">
           <MovieInfo
-            image={this.state.image}
-            title={this.state.currentMovie}
-            synopsis={this.state.synopsis}
+            image={image}
+            title={currentMovie}
+            synopsis={synopsis}
           />
           <div className="buttons">
             <Button
