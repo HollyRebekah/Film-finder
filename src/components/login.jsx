@@ -67,11 +67,16 @@ class Login extends React.Component {
             onClick={this.handleLogin}
             className="movie-button"
             text="Login"
-          /> or <Link to="/sign-up">Sign Up</Link>
+          /> or
+          <Link
+            className="signup-link"
+            to="/sign-up"
+          > Sign Up
+          </Link>
         </div>
         {
           this.state.errorMessage &&
-          <div><span>{this.state.errorMessage}</span></div>
+          <div>{this.state.errorMessage}</div>
         }
       </div>
     );
