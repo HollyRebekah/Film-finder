@@ -1,5 +1,6 @@
 import React from 'react';
 import '../styles/dropdown.css';
+import '../styles/moviedb.css';
 
 const DropdownButton = (props) => {
   return (
@@ -11,7 +12,8 @@ const DropdownButton = (props) => {
           name="pick-genre"
           onChange={props.onClick}
         >
-          <option value="">Pick a genre...</option>
+          <option disabled selected>Pick a genre...</option>
+          <option value="anything">Anything</option>
           <option value="action">Action</option>
           <option value="comedy">Comedy</option>
           <option value="crime">Crime</option>

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import TokenManager from '../utils/token-manager';
+import Button from './Button';
 import '../styles/button.css';
 import '../styles/sign-log.css';
 
@@ -21,11 +22,10 @@ class Login extends React.Component {
 
   handleInputChange(event) {
     const { name, value } = event.target;
-
     this.setState({ [name]: value });
   }
 
-  handleLogin() {
+  handleLogin(event) {
     axios.post('http://localhost:8080/filmfinder/auth', {
       email: this.state.email,
       password: this.state.password,
@@ -45,37 +45,38 @@ class Login extends React.Component {
       <div className="login-form">
         <h1>Login</h1>
         <div>
-          <label htmlFor="email">
-            <input
-              type="email"
-              name="email"
-              placeholder="Email"
-              value={this.state.email}
-              onChange={this.handleInputChange}
-            />
-          </label>
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={this.state.email}
+            onChange={this.handleInputChange}
+          />
         </div>
         <div>
-          <label htmlFor="email">
-            <input
-              type="password"
-              name="password"
-              placeholder="Password"
-              value={this.state.password}
-              onChange={this.handleInputChange}
-            />
-          </label>
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={this.state.password}
+            onChange={this.handleInputChange}
+          />
         </div>
-        <div className="actions">
-          <button
+        <div>
+          <Button
             onClick={this.handleLogin}
             className="movie-button"
-          >Login
-          </button> or <Link to="/sign-up">Sign Up</Link>
+            text="Login"
+          /> or
+          <Link
+            className="signup-link"
+            to="/sign-up"
+          > Sign Up
+          </Link>
         </div>
         {
           this.state.errorMessage &&
-          <div><span>{this.state.errorMessage}</span></div>
+          <div>{this.state.errorMessage}</div>
         }
       </div>
     );
