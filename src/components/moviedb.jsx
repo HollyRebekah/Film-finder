@@ -1,7 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import SaveButton from './saveButton';
-import SearchButton from './searchButton';
+import Button from './Button';
 import DropdownButton from './dropdown-button';
 import CommentBox from './comment-box';
 import MovieInfo from './movie-info';
@@ -89,7 +88,8 @@ class Moviedb extends React.Component {
 
   saveMovie() {
     const index = this.state.movieList.findIndex(x => x === (this.state.currentMovie));
-    this.state.movieList.splice(index, 1);
+    const newList = this.state.movieList.splice(index, 1);
+    this.setState({ movieList: newList });
     axios.post('http://localhost:8080/filmfinder/users/movie', {
       email: this.props.user.email,
       movie: this.state.currentMovie,
@@ -98,19 +98,25 @@ class Moviedb extends React.Component {
   }
 
   render() {
+    const {
+      loading, showPopup, currentMovie, image, synopsis,
+    } = this.state;
+
     return (
       <div className="movie-page">
         <DropdownButton onClick={this.getData} />
-        {this.state.loading && (
-          <Loader
-            type="TailSpin"
-            color="#FFF"
-            height={100}
-            width={100}
-          />
+        {loading && (
+          <div className="center">
+            <Loader
+              type="TailSpin"
+              color="#FFF"
+              height={100}
+              width={100}
+            />
+          </div>
         )}
 
-        {this.state.showPopup ? (
+        {showPopup ? (
           <CommentBox
             text={this.state.currentMovie}
             image={this.state.image}
@@ -121,17 +127,22 @@ class Moviedb extends React.Component {
           }
 
 
-        {this.state.currentMovie && (
-        <div className="movie-details">
+        {currentMovie && (
+        <div className="center">
           <MovieInfo
-            image={this.state.image}
-            title={this.state.currentMovie}
-            synopsis={this.state.synopsis}
+            image={image}
+            title={currentMovie}
+            synopsis={synopsis}
           />
-          <div className="buttons">
-            <SearchButton onClick={this.pickMovie} />
-            <div className="divider" />
-            <SaveButton onClick={this.saveMovie} />
+          <div className="center">
+            <Button
+              onClick={this.pickMovie}
+              text="Pick me another"
+            />
+            <Button
+              onClick={this.saveMovie}
+              text="I watched this!"
+            />
           </div>
         </div>
         )}

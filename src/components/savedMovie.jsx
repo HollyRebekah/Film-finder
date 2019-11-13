@@ -1,4 +1,5 @@
 import React from 'react';
+import '../styles/user-account.css';
 
 const SavedMovie = props => {
   const comment = `Comment: ${props.comment}`;

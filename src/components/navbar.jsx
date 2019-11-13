@@ -10,6 +10,7 @@ const NavBar = (props) => {
       <div className="title">
         NetPix
       </div>
+      {props.user && (
       <div className="links">
         <Link to="/">
           <MdLocalMovies
@@ -24,6 +25,7 @@ const NavBar = (props) => {
           />
         </Link>
       </div>
+)}
     </div>
   );
 };

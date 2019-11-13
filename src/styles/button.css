@@ -1,5 +1,4 @@
 .movie-button{
-    display:inline-block;
     border:0.1em solid #FFFFFF;
     background: none;
     margin:0 0.3em 0.3em 0;
@@ -8,10 +7,9 @@
     text-decoration:none;
     font-weight:300;
     color:#FFFFFF;
-    text-align:center;
     transition: all 0.2s;
     margin-top: 5px;
-    
+    justify-content: center;
 }
 
 .movie-button:hover{
