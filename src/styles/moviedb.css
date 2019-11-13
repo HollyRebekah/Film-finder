@@ -4,15 +4,11 @@ body{
 }
 
 .movie-page{
+    display:flex;
+    flex-direction: column;
+}
+
+.center{
+    justify-content: center;
     text-align: center;
-}
-
-.buttons{
-    padding:5px;
-}
-
-.divider{
-    width:5px;
-    height:auto;
-    display:inline-block;
 }

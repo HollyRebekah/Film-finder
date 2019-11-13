@@ -105,12 +105,14 @@ class Moviedb extends React.Component {
       <div className="movie-page">
         <DropdownButton onClick={this.getData} />
         {loading && (
-          <Loader
-            type="TailSpin"
-            color="#FFF"
-            height={100}
-            width={100}
-          />
+          <div className="center">
+            <Loader
+              type="TailSpin"
+              color="#FFF"
+              height={100}
+              width={100}
+            />
+          </div>
         )}
 
         {showPopup ? (
@@ -124,18 +126,17 @@ class Moviedb extends React.Component {
 
 
         {currentMovie && (
-        <div className="movie-details">
+        <div className="center">
           <MovieInfo
             image={image}
             title={currentMovie}
             synopsis={synopsis}
           />
-          <div className="buttons">
+          <div className="center">
             <Button
               onClick={this.pickMovie}
               text="Pick me another"
             />
-            <div className="divider" />
             <Button
               onClick={this.saveMovie}
               text="I watched this!"
