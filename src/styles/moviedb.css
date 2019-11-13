@@ -16,3 +16,7 @@ body{
     height:auto;
     display:inline-block;
 }
+
+.movie-details {
+    text-align-last: center;
+}

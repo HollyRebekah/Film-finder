@@ -17,10 +17,13 @@ class CommentBox extends React.Component {
     return (
       <div className="popup">
         <div className="popup\_inner">
-          <h1>{this.props.text}</h1>
+          <h1>What did you think of {this.props.text}?</h1>
+          <div>
+            <img src={this.props.image} />
+          </div>
           <button onClick={this.props.onClose}>close me</button>
-          <form>
-            <input type="text" onChange={this.handleChange} value={this.state.comment} />
+          <form className="form">
+            <input className="textBox" type="text" onChange={this.handleChange} value={this.state.comment} />
           </form>
           <button type="submit" onClick={this.props.onSubmit} value={this.state.comment}>Post Your Thoughts</button>
         </div>

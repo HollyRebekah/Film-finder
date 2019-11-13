@@ -39,6 +39,7 @@ class Moviedb extends React.Component {
       .then(response => {
         console.log(response);
       });
+    this.closePopup();
   };
 
   togglePopup() {
@@ -111,27 +112,28 @@ class Moviedb extends React.Component {
 
         {this.state.showPopup ? (
           <CommentBox
-              text="What did you think of it?"
-              onClose={this.closePopup}
-              onSubmit={this.handleSubmitNewComment}
-            />
+            text={this.state.currentMovie}
+            image={this.state.image}
+            onClose={this.closePopup}
+            onSubmit={this.handleSubmitNewComment}
+          />
         ) : null
           }
 
 
         {this.state.currentMovie && (
         <div className="movie-details">
-              <MovieInfo
+          <MovieInfo
             image={this.state.image}
             title={this.state.currentMovie}
             synopsis={this.state.synopsis}
           />
-              <div className="buttons">
+          <div className="buttons">
             <SearchButton onClick={this.pickMovie} />
             <div className="divider" />
             <SaveButton onClick={this.saveMovie} />
           </div>
-            </div>
+        </div>
         )}
       </div>
     );
