@@ -1,25 +1,28 @@
 import React from 'react';
 import axios from 'axios';
+import SavedMovie from './savedMovie';
 import '../styles/user-account.css';
 
 class UserAccount extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      images: [],
+      movies: [],
     };
   }
 
   componentDidMount() {
     axios.get(`http://localhost:8080/filmfinder/users/${this.props.user.email}`)
       .then((response) => {
+        console.log(response);
         return axios.post(
           'http://localhost:8080/filmfinder/movies/image',
           { title: response.data.filmsWatched }
         );
       }).then(response => {
+        console.log(response);
         this.setState({
-          images: response.data,
+          movies: response.data,
         });
       });
   }
@@ -33,9 +36,9 @@ class UserAccount extends React.Component {
         <h1>User: {firstName}</h1>
         <div>{firstName} has watched...</div>
         <div className="movie-list">
-          {images.map((image, i) => {
+          {this.state.movies.map((movie) => {
             return (
-              <li className="movie-image" key={`movie.${i}`}><img className="movie" alt="movie" src={image} /></li>
+              <SavedMovie className="movie-image" {...movie} key={movie._id} />
             );
           })}
         </div>

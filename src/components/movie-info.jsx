@@ -1,4 +1,5 @@
 import React from 'react';
+import '../styles/movie-info.css';
 import '../styles/moviedb.css';
 
 const MovieInfo = (props) => {

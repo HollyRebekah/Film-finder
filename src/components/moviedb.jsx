@@ -1,9 +1,9 @@
 import React from 'react';
 import axios from 'axios';
 import Button from './Button';
-import DropdownButton from './Dropdown-Button';
-import CommentBox from './Comment-Box';
-import MovieInfo from './Movie-Info';
+import DropdownButton from './dropdown-button';
+import CommentBox from './comment-box';
+import MovieInfo from './movie-info';
 import He from 'he';
 import Loader from 'react-loader-spinner';
 import '../styles/moviedb.css';
@@ -38,6 +38,7 @@ class Moviedb extends React.Component {
       .then(response => {
         console.log(response);
       });
+    this.closePopup();
   };
 
   togglePopup() {
@@ -117,7 +118,8 @@ class Moviedb extends React.Component {
 
         {showPopup ? (
           <CommentBox
-            text="What did you think of it?"
+            text={this.state.currentMovie}
+            image={this.state.image}
             onClose={this.closePopup}
             onSubmit={this.handleSubmitNewComment}
           />
