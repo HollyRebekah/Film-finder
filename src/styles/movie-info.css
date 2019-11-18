@@ -1,12 +1,8 @@
 .movie-info {
     text-align: center;
-    background-color: darkred;
-    width: 260px;
     display: inline-block;
-    border: 10px ridge #8C0B1B;
 }
 .synopsis {
-    width: 250px;
     overflow-wrap: break-word;
     display: inline-block;
 }

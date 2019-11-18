@@ -12,11 +12,11 @@ class UserAccount extends React.Component {
   }
 
   componentDidMount() {
-    axios.get(`http://localhost:8080/filmfinder/users/${this.props.user.email}`)
+    axios.get(`https://netpix-api.herokuapp.com/filmfinder/users/${this.props.user.email}`)
       .then((response) => {
         console.log(response);
         return axios.post(
-          'http://localhost:8080/filmfinder/movies/image',
+          'https://netpix-api.herokuapp.com/filmfinder/movies/image',
           { title: response.data.filmsWatched }
         );
       }).then(response => {
