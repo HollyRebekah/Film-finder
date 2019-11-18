@@ -137,7 +137,7 @@ class Moviedb extends React.Component {
           <div className="center">
             <Button
               onClick={this.pickMovie}
-              text="Pick me another"
+              text="Pick me a mother"
             />
             <Button
               onClick={this.saveMovie}
