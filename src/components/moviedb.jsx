@@ -31,7 +31,7 @@ class Moviedb extends React.Component {
 
   handleSubmitNewComment = (event) => {
     console.log(this.state.currentMovie);
-    axios.post('http://localhost:8080/filmfinder/movies', {
+    axios.post('https://netpix-api.herokuapp.com/filmfinder/movies', {
       title: this.state.currentMovie,
       comment: event.target.value,
     })
@@ -58,7 +58,7 @@ class Moviedb extends React.Component {
       loading: true,
       currentMovie: null,
     });
-    axios.post('http://localhost:8080/filmfinder/movies/genre', {
+    axios.post('https://netpix-api.herokuapp.com/filmfinder/movies/genre', {
       genre: event.target.value,
     }).then(response => {
       const movieData = response.data;
@@ -90,7 +90,7 @@ class Moviedb extends React.Component {
     const index = this.state.movieList.findIndex(x => x === (this.state.currentMovie));
     const newList = this.state.movieList.splice(index, 1);
     this.setState({ movieList: newList });
-    axios.post('http://localhost:8080/filmfinder/users/movie', {
+    axios.post('https://netpix-api.herokuapp.com/filmfinder/users/movie', {
       email: this.props.user.email,
       movie: this.state.currentMovie,
     });

@@ -17,7 +17,7 @@ class signUp extends React.Component {
   }
 
   handleCreateUser = (event) => {
-    Axios.post('http://localhost:8080/filmfinder/users', {
+    Axios.post('https://netpix-api.herokuapp.com/filmfinder/users', {
       withCredentials: true,
       firstName: this.state.firstName,
       lastName: this.state.lastName,

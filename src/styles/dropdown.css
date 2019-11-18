@@ -1,7 +1,6 @@
 .drop-down{
     text-align: center;
     padding-bottom: 5px;
-    background: none;
 }
 
 .heading{
@@ -9,10 +8,10 @@
 }
 
 #options{
-    background: transparent;
     color:white;
     cursor: pointer;
     width:200px;
+    background-color: black;
 }
 
 #options:focus{

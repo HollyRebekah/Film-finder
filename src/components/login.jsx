@@ -26,7 +26,7 @@ class Login extends React.Component {
   }
 
   handleLogin(event) {
-    axios.post('http://localhost:8080/filmfinder/auth', {
+    axios.post('https://netpix-api.herokuapp.com/filmfinder/auth', {
       email: this.state.email,
       password: this.state.password,
     })
