@@ -8,9 +8,9 @@
     bottom: 0;  
     margin: auto;  
     background-image: url("https://i.ibb.co/cLMP5BF/Screenshot-2019-10-30-at-19-47-10.png");
-    text-align: center;
-    display: inline-block;
+    display: flex;
     align-items: center;
+    justify-content: center;
   }
 .textBox {
     box-sizing: border-box;
