@@ -15,13 +15,13 @@
   .popup\_inner {  
     position: absolute;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
   }
   .form {
     margin-top: 2.5%;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
   }
   .textBox {
