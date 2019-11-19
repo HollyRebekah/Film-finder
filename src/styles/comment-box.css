@@ -31,7 +31,10 @@
   color:#FFFFFF;
   transition: all 0.2s;
   margin-top: 5px;
-  float: right;
+}
+
+.close{
+  align-content: flex-end;
 }
 
 .close-button:hover{

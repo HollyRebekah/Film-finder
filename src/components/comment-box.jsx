@@ -17,7 +17,9 @@ class CommentBox extends React.Component {
   render() {
     return (
       <div className="popup">
-        <button className="close-button" onClick={this.props.onClose}>close me</button>
+        <div className="close">
+          <button className="close-button" onClick={this.props.onClose}>close me</button>
+        </div>
         <h1>What did you think of {this.props.text}?</h1>
         <div>
           <img src={this.props.image} />
