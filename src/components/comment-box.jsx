@@ -1,5 +1,6 @@
 /* eslint-disable react/prefer-stateless-function */
 import React from 'react';
+import { IoMdClose } from 'react-icons/io';
 import '../styles/comment-box.css';
 import '../styles/button.css';
 
@@ -17,14 +18,18 @@ class CommentBox extends React.Component {
   render() {
     return (
       <div className="popup">
-        <div className="close">
-          <div className="logo">
-            NetPix
+        <div id="popup-header">
+          <h1>What did you think of {this.props.text}?</h1>
+          <div
+            className="close-button"
+            onClick={this.props.onClose}
+          >
+            <IoMdClose
+              size={32}
+            />
           </div>
-          <button className="close-button" onClick={this.props.onClose}>close me</button>
         </div>
-        <h1>What did you think of {this.props.text}?</h1>
-        <div>
+        <div className="comment-image">
           <img src={this.props.image} />
         </div>
         <input className="textBox" type="text" onChange={this.handleChange} value={this.state.comment} />
