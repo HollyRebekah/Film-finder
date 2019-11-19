@@ -1,6 +1,7 @@
 /* eslint-disable react/prefer-stateless-function */
 import React from 'react';
 import '../styles/comment-box.css';
+import '../styles/button.css';
 
 class CommentBox extends React.Component {
   state = {
@@ -21,11 +22,11 @@ class CommentBox extends React.Component {
           <div>
             <img src={this.props.image} />
           </div>
-          <button onClick={this.props.onClose}>close me</button>
+          <button className="movie-button" onClick={this.props.onClose}>close me</button>
           <form className="form">
             <input className="textBox" type="text" onChange={this.handleChange} value={this.state.comment} />
           </form>
-          <button type="submit" onClick={this.props.onSubmit} value={this.state.comment}>Post Your Thoughts</button>
+          <button className="movie-button" type="submit" onClick={this.props.onSubmit} value={this.state.comment}>Post Your Thoughts</button>
         </div>
       </div>
     );
