@@ -19,9 +19,7 @@ class CommentBox extends React.Component {
       <div className="popup">
         <div className="popup\_inner">
           <h1>What did you think of {this.props.text}?</h1>
-          <div>
-            <img src={this.props.image} />
-          </div>
+          <img src={this.props.image} />
           <button className="movie-button" onClick={this.props.onClose}>close me</button>
           <form className="form">
             <input className="textBox" type="text" onChange={this.handleChange} value={this.state.comment} />
