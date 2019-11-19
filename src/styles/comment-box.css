@@ -34,7 +34,7 @@
 }
 
 .close{
-  align-content: flex-end;
+  justify-content: end;
 }
 
 .close-button:hover{
