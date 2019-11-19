@@ -9,9 +9,8 @@
     margin: auto;  
     background-image: url("https://i.ibb.co/cLMP5BF/Screenshot-2019-10-30-at-19-47-10.png");
     display: flex;
-    flex-direction: row;
-    align-items: center;
     justify-content: center;
+    align-items: center;
   }
 .textBox {
     box-sizing: border-box;
