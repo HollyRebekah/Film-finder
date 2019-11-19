@@ -24,9 +24,7 @@ class CommentBox extends React.Component {
         <div>
           <button className="movie-button" onClick={this.props.onClose}>close me</button>
         </div>
-        <div>
-          <input className="textBox" type="text" onChange={this.handleChange} value={this.state.comment} />
-        </div>
+        <input className="textBox" type="text" onChange={this.handleChange} value={this.state.comment} />
         <div>
           <button className="movie-button" type="submit" onClick={this.props.onSubmit} value={this.state.comment}>Post Your Thoughts</button>
         </div>
