@@ -32,3 +32,27 @@
   .textBox {
     background-color: darkred;
   }
+  .button{
+    border:0.1em solid #FFFFFF;
+    background: none;
+    margin:0 0.3em 0.3em 0;
+    border-radius:0.12em;
+    box-sizing: border-box;
+    text-decoration:none;
+    font-weight:300;
+    color:#FFFFFF;
+    transition: all 0.2s;
+    margin-top: 5px;
+    justify-content: center;
+}
+
+.button:hover{
+    background-color:#FFFFFF;
+    color:#000000;
+    
+}
+
+.button:focus{
+    outline:0;
+}
+
