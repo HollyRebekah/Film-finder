@@ -34,7 +34,7 @@
 }
 
 .close{
-  justify-content: end;
+  justify-items: end;
 }
 
 .close-button:hover{
