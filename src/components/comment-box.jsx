@@ -18,6 +18,9 @@ class CommentBox extends React.Component {
     return (
       <div className="popup">
         <div className="close">
+          <div className="logo">
+            NetPix
+          </div>
           <button className="close-button" onClick={this.props.onClose}>close me</button>
         </div>
         <h1>What did you think of {this.props.text}?</h1>

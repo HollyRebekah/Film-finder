@@ -34,7 +34,15 @@
 }
 
 .close{
-  justify-items: end;
+  border-bottom: 1px solid black;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5px;
+}
+
+.logo{
+  font-family: 'Bowlby One SC', cursive;
+  font-size: x-large;
 }
 
 .close-button:hover{
