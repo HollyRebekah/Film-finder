@@ -19,6 +19,28 @@
     color: white;
     width: 25%;
     font-size: 20px;
-    margin-bottom: 5%;
+}
+.close-button{
+  border:0.1em solid #FFFFFF;
+  background: none;
+  margin:0 0.3em 0.3em 0;
+  border-radius:0.12em;
+  box-sizing: border-box;
+  text-decoration:none;
+  font-weight:300;
+  color:#FFFFFF;
+  transition: all 0.2s;
+  margin-top: 5px;
+  float: right;
+}
+
+.close-button:hover{
+  background-color:#FFFFFF;
+  color:#000000;
+  
+}
+
+.close-button:focus{
+  outline:0;
 }
   
