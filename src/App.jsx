@@ -6,6 +6,7 @@ import SignUp from './components/signup';
 import NavBar from './components/navbar';
 import TokenManager from './utils/token-manager';
 import UserAccount from './components/user-account';
+import CommentBox from './components/comment-box';
 import './styles/App.css';
 
 class App extends React.Component {

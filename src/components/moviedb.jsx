@@ -6,6 +6,7 @@ import CommentBox from './comment-box';
 import MovieInfo from './movie-info';
 import He from 'he';
 import Loader from 'react-loader-spinner';
+import { Switch, Route, Link } from 'react-router-dom';
 import '../styles/moviedb.css';
 
 
@@ -116,16 +117,6 @@ class Moviedb extends React.Component {
           </div>
         )}
 
-        {showPopup ? (
-          <CommentBox
-            text={this.state.currentMovie}
-            image={this.state.image}
-            onClose={this.closePopup}
-            onSubmit={this.handleSubmitNewComment}
-          />
-        ) : null
-          }
-
 
         {currentMovie && (
         <div className="center">
@@ -139,13 +130,32 @@ class Moviedb extends React.Component {
               onClick={this.pickMovie}
               text="Pick me another"
             />
-            <Button
-              onClick={this.saveMovie}
-              text="I watched this!"
-            />
+            <Link to="/comment">
+              <Button
+                onClick={this.saveMovie}
+                text="I watched this!"
+              />
+            </Link>
           </div>
         </div>
         )}
+
+
+        <Route
+          exact
+          path="/comment"
+          render={(props) => (
+            <CommentBox
+              {...props}
+              text={currentMovie}
+              image={image}
+              onClose={this.closePopup}
+              onSubmit={this.handleSubmitNewComment}
+            />
+          )}
+        />
+
+
       </div>
     );
   }
